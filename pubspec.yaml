@@ -1,0 +1,29 @@
+name: educative_software
+description: "Una aplicación educativa para enseñar sobre los símbolos y atributos nacionales"
+publish_to: "none"
+version: 0.2.1
+
+environment:
+  sdk: ">=3.4.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  sqflite: ^2.3.0
+  shared_preferences: ^2.2.2
+  path: any
+  provider: ^6.1.2
+  url_launcher: ^6.3.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+  sqflite_common_ffi: ^2.3.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/json/
