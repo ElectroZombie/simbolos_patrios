@@ -26,7 +26,7 @@ class ChapterProvider extends ChangeNotifier {
   }
 
   cleanProgress() {
-    for (int i = 0; i < chapters.length; i++) {
+    for (int i = 1; i < chapters.length; i++) {
       chapters[i].activated = false;
     }
     notifyListeners();

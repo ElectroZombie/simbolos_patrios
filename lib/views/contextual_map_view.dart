@@ -26,8 +26,9 @@ class _ContextualMapState extends State<ContextualMap> {
         .getChapter(chapter.chapterID)
         .activated) {
       errorDialogWidget("Todavia este capitulo no esta disponible", context);
+    } else {
+      Navigator.pushNamed(context, '/chapter_info', arguments: chapter);
     }
-    Navigator.pushNamed(context, '/chapter_info', arguments: chapter);
   }
 
   @override
