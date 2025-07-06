@@ -18,13 +18,13 @@ buttonStyle(ColorScheme colors) {
 
 iconButtonStyle(ColorScheme colors) {
   return ButtonStyle(
-      fixedSize: const WidgetStatePropertyAll(Size(45, 45)),
+      fixedSize: const WidgetStatePropertyAll(Size(60, 60)),
       backgroundColor: WidgetStatePropertyAll(colors.secondary),
       shadowColor: WidgetStatePropertyAll(colors.tertiary),
       overlayColor: WidgetStatePropertyAll(colors.onPrimaryFixedVariant),
       foregroundColor: WidgetStatePropertyAll(colors.onSecondary),
       textStyle: WidgetStatePropertyAll(TextStyle(
-          fontSize: 12,
+          fontSize: 14,
           color: colors.onSecondary,
           fontWeight: FontWeight.bold)),
       shape: WidgetStatePropertyAll(RoundedRectangleBorder(
