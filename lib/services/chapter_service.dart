@@ -31,11 +31,11 @@ class ChapterService {
 
   static Future<void> insertChapters(
       Database db, List<String> chapterNames) async {
-    for (int i = 0; i < chapterNames.length; i++) {
+    for (int i = 1; i <= chapterNames.length; i++) {
       await db.insert('chapter', {
         'id_chapter': i,
-        'name_chapter': chapterNames[i],
-        'activated': ((i == 0) ? 0 : 1)
+        'name_chapter': chapterNames[i - 1],
+        'activated': ((i == 1) ? 0 : 1)
       });
     }
   }
