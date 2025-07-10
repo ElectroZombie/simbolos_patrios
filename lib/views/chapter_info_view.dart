@@ -3,10 +3,8 @@ import 'dart:convert';
 import 'package:educative_software/widgets/gradient.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
 
 import '../models/chapter_model.dart';
-import '../providers/chapter_provider.dart';
 
 class ChapterInfo extends StatefulWidget {
   const ChapterInfo({super.key});

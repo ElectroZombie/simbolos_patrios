@@ -10,13 +10,13 @@ class LandingView extends StatelessWidget {
   const LandingView({super.key});
 
   void goToContextualMap(context) async {
+    await Provider.of<ChapterProvider>(context, listen: false).setValues();
     Navigator.pushNamed(context, '/contextual_map');
   }
 
   @override
   Widget build(BuildContext context) {
     var colors = Theme.of(context).colorScheme;
-    Provider.of<ChapterProvider>(context).setValues();
 
     return Scaffold(
       backgroundColor: colors.surfaceContainerHighest,

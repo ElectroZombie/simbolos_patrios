@@ -46,7 +46,7 @@ class ChapterService {
   }
 
   static Future<void> cleanProgress(Database db) async {
-    for (int i = 1; i < 3; i++) {
+    for (int i = 2; i <= 6; i++) {
       await db.update('chapter', {'activated': 1},
           where: 'id_chapter = ?', whereArgs: [i]);
     }

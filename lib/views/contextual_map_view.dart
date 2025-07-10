@@ -120,7 +120,7 @@ class _ContextualMapState extends State<ContextualMap> {
             IconButton(
               onPressed: () =>
                   Provider.of<ChapterProvider>(context, listen: false)
-                      .cleanProgress,
+                      .cleanProgress(),
               icon: const Icon(Icons.clear_outlined),
               style: iconButtonStyle(colors),
             )

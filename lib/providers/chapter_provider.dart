@@ -25,14 +25,18 @@ class ChapterProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  cleanProgress() {
-    for (int i = 1; i < chapters.length; i++) {
+  cleanProgress() async {
+    for (int i = 2; i < chapters.length; i++) {
       chapters[i].activated = false;
     }
+    DBService.cleanProgress();
     notifyListeners();
   }
 
   loadChapters() async {
+    if (chapters.length > 1) {
+      return;
+    }
     List<ChapterModel> chaptersDB = await DBService.getChapters();
     chapters =
         chapters + List.generate(chaptersDB.length, (i) => chaptersDB[i]);
