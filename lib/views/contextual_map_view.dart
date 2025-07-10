@@ -46,19 +46,21 @@ class _ContextualMapState extends State<ContextualMap> {
         .activated) {
       errorDialogWidget("Todavia este capitulo no esta disponible", context);
     } else {
+      await Provider.of<ChapterProvider>(context, listen: false)
+          .activateNextChapter(chapter.chapterID + 1);
+
       Navigator.pushNamed(context, '/chapter_info', arguments: chapter);
     }
   }
 
   void addClickCount(ChapterModel chapter) {
-    if (!M[chapter.chapterID + 1]!.activated) {
+    if (!M[chapter.chapterID]!.activated) {
       return;
     }
-    M[chapter.chapterID + 1]!.touchCount =
-        M[chapter.chapterID + 1]!.touchCount! + 1;
+    M[chapter.chapterID]!.touchCount = M[chapter.chapterID]!.touchCount! + 1;
 
-    if (M[chapter.chapterID + 1]!.touchCount == 2) {
-      M[chapter.chapterID + 1]!.touchCount = 0;
+    if (M[chapter.chapterID]!.touchCount == 2) {
+      M[chapter.chapterID]!.touchCount = 0;
       setState(() {});
       goToChapterInfo(context, chapter);
     }
@@ -68,10 +70,11 @@ class _ContextualMapState extends State<ContextualMap> {
   Widget selectStyle(int index) {
     if (M[index]!.activated) {
       if (M[index]!.touchCount == 0) {
-        return const Icon(
+        return const Center(
+            child: Icon(
           Icons.question_mark_outlined,
           size: 30,
-        );
+        ));
       } else {
         return Text("#${M[index]!.id}",
             style:
@@ -90,6 +93,20 @@ class _ContextualMapState extends State<ContextualMap> {
   @override
   Widget build(BuildContext context) {
     ColorScheme colors = Theme.of(context).colorScheme;
+
+    icon_1.activated =
+        Provider.of<ChapterProvider>(context).getChapter(1).activated;
+    icon_2.activated =
+        Provider.of<ChapterProvider>(context).getChapter(2).activated;
+    icon_3.activated =
+        Provider.of<ChapterProvider>(context).getChapter(3).activated;
+    icon_4.activated =
+        Provider.of<ChapterProvider>(context).getChapter(4).activated;
+    icon_5.activated =
+        Provider.of<ChapterProvider>(context).getChapter(5).activated;
+    icon_6.activated =
+        Provider.of<ChapterProvider>(context).getChapter(6).activated;
+
     return Scaffold(
         backgroundColor: colors.surfaceContainerHighest,
         appBar: AppBar(
@@ -102,7 +119,8 @@ class _ContextualMapState extends State<ContextualMap> {
           actions: [
             IconButton(
               onPressed: () =>
-                  Provider.of<ChapterProvider>(context).cleanProgress,
+                  Provider.of<ChapterProvider>(context, listen: false)
+                      .cleanProgress,
               icon: const Icon(Icons.clear_outlined),
               style: iconButtonStyle(colors),
             )
@@ -125,19 +143,9 @@ class _ContextualMapState extends State<ContextualMap> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              buttonIndex(data.getChapter(0), colors),
                               buttonIndex(data.getChapter(1), colors),
                               buttonIndex(data.getChapter(2), colors),
-                            ],
-                          ),
-                          SizedBox(
-                            height: (MediaQuery.of(context).size.height * 0.21),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
                               buttonIndex(data.getChapter(3), colors),
-                              buttonIndex(data.getChapter(4), colors),
                             ],
                           ),
                           SizedBox(
@@ -146,85 +154,28 @@ class _ContextualMapState extends State<ContextualMap> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
+                              buttonIndex(data.getChapter(4), colors),
                               buttonIndex(data.getChapter(5), colors),
+                            ],
+                          ),
+                          SizedBox(
+                            height: (MediaQuery.of(context).size.height * 0.21),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              buttonIndex(data.getChapter(6), colors),
                             ],
                           ),
                         ])))
           ],
-        )
-        /*gradient(colors),
-          Center(
-              child: SizedBox(
-                  width: MediaQuery.of(context).size.width * 9 / 10,
-                  child: ListView.builder(
-                      itemExtent: MediaQuery.of(context).size.height * 1.5 / 10,
-                      shrinkWrap: true,
-                      itemCount: 6,
-                      itemBuilder: (context, index) => ListTile(
-                            visualDensity: const VisualDensity(vertical: 4),
-                            tileColor: colors.primary,
-                            shape: RoundedRectangleBorder(
-                                side: BorderSide(
-                                    color: colors.tertiary, width: 1.75),
-                                borderRadius: BorderRadius.circular(5)),
-                            titleAlignment: ListTileTitleAlignment.titleHeight,
-                            title: Text("Clase #${index + 1}",
-                                style: const TextStyle(
-                                    fontSize: 24,
-                                    fontFamily: "Times new roman")),
-                            subtitle: Consumer<ChapterProvider>(
-                                builder: (context, data, child) => Column(
-                                      children: [
-                                        SizedBox(
-                                            height: (MediaQuery.of(context)
-                                                        .size
-                                                        .height *
-                                                    0.10) /
-                                                10),
-                                        Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              Image.asset(
-                                                  'assets/images/info_${data.getChapter(index).chapterID + 1}_1.png',
-                                                  height: 50,
-                                                  width: 50),
-                                              const SizedBox(width: 10),
-                                              IconButton(
-                                                onPressed: () =>
-                                                    goToChapterInfo(context,
-                                                        data.getChapter(index)),
-                                                icon: const Icon(Icons
-                                                    .arrow_circle_right_outlined),
-                                                tooltip: "IR AL CONTENIDO",
-                                              ),
-                                              Text(
-                                                data
-                                                    .getChapter(index)
-                                                    .chapterName,
-                                                style: const TextStyle(
-                                                    fontSize: 14,
-                                                    fontFamily:
-                                                        "Times new roman"),
-                                              )
-                                            ]),
-                                        SizedBox(
-                                            height: (MediaQuery.of(context)
-                                                        .size
-                                                        .height *
-                                                    0.5) /
-                                                10),
-                                      ],
-                                    )),
-                          ))))*/
-        );
+        ));
   }
 
   Widget buttonIndex(ChapterModel chapter, colors) {
     return ElevatedButton(
-      onPressed: () => addClickCount(chapter),
-      style: iconButtonStyle(colors),
-      child: selectStyle(chapter.chapterID + 1),
-    );
+        onPressed: () => addClickCount(chapter),
+        style: iconButtonStyle(colors),
+        child: selectStyle(chapter.chapterID));
   }
 }

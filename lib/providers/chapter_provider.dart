@@ -3,7 +3,7 @@ import 'package:educative_software/models/chapter_model.dart';
 import 'package:educative_software/services/db_service.dart';
 
 class ChapterProvider extends ChangeNotifier {
-  List<ChapterModel> chapters = [];
+  List<ChapterModel> chapters = [ChapterModel.nullChapter()];
 
   List<ChapterModel> getChapters() => chapters;
 
@@ -33,7 +33,8 @@ class ChapterProvider extends ChangeNotifier {
   }
 
   loadChapters() async {
-    List<ChapterModel> chapters = await DBService.getChapters();
-    this.chapters = List.generate(chapters.length, (i) => chapters[i]);
+    List<ChapterModel> chaptersDB = await DBService.getChapters();
+    chapters =
+        chapters + List.generate(chaptersDB.length, (i) => chaptersDB[i]);
   }
 }
