@@ -23,15 +23,12 @@ class _ChapterInfoState extends State<ChapterInfo> {
   _updateInfo(ChapterModel chapter, context) async {
     this.chapter = chapter;
     var json = await rootBundle
-        .loadString("assets/json/chapter_info_${chapter.chapterID + 1}.json");
+        .loadString("assets/json/chapter_info_${chapter.chapterID}.json");
     List<dynamic> chapterInfo = await jsonDecode(json);
     info.clear();
     for (var inf in chapterInfo) {
       info.add(inf['info']);
     }
-
-    await Provider.of<ChapterProvider>(context, listen: false)
-        .activateNextChapter(chapter.chapterID + 1);
 
     setState(() {});
   }
@@ -79,7 +76,7 @@ class _ChapterInfoState extends State<ChapterInfo> {
                         SizedBox(
                             height: MediaQuery.of(context).size.height / 100),
                         Image.asset(
-                            "assets/images/info_${chapter.chapterID + 1}_${i + 1}.png"),
+                            "assets/images/info_${chapter.chapterID}_${i + 1}.png"),
                         SizedBox(
                             height: MediaQuery.of(context).size.height / 100),
                         Text(info[i],
