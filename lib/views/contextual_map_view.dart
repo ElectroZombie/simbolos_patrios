@@ -1,4 +1,5 @@
 import 'package:educative_software/structs/contextual_icon.dart';
+import 'package:educative_software/widgets/confirm_dialog_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:educative_software/models/chapter_model.dart';
@@ -41,44 +42,53 @@ class _ContextualMapState extends State<ContextualMap> {
   }
 
   void goToChapterInfo(context, ChapterModel chapter) async {
-    if (!Provider.of<ChapterProvider>(context, listen: false)
-        .getChapter(chapter.chapterID)
-        .activated) {
-      errorDialogWidget("Todavia este capitulo no esta disponible", context);
-    } else {
-      await Provider.of<ChapterProvider>(context, listen: false)
-          .activateNextChapter(chapter.chapterID + 1);
+    await Provider.of<ChapterProvider>(context, listen: false)
+        .activateNextChapter(chapter.chapterID + 1);
 
-      Navigator.pushNamed(context, '/chapter_info', arguments: chapter);
-    }
+    Navigator.pushNamed(context, '/chapter_info', arguments: chapter);
   }
 
   void addClickCount(ChapterModel chapter) {
     if (!M[chapter.chapterID]!.activated) {
+      errorDialogWidget(
+          "Este capítulo no se encuentra disponible todavía. Primero debes completar el tema anterior",
+          context);
       return;
-    }
-    M[chapter.chapterID]!.touchCount = M[chapter.chapterID]!.touchCount! + 1;
-
-    if (M[chapter.chapterID]!.touchCount == 2) {
-      M[chapter.chapterID]!.touchCount = 0;
-      setState(() {});
+    } else if (M[chapter.chapterID + 1]!.activated) {
       goToChapterInfo(context, chapter);
+      return;
+    } else {
+      M[chapter.chapterID]!.touchCount = M[chapter.chapterID]!.touchCount! + 1;
+
+      if (M[chapter.chapterID]!.touchCount == 2) {
+        M[chapter.chapterID]!.touchCount = 0;
+        setState(() {});
+        goToChapterInfo(context, chapter);
+      }
+      setState(() {});
     }
-    setState(() {});
   }
 
   Widget selectStyle(int index) {
     if (M[index]!.activated) {
+      if (M[index + 1]!.activated) {
+        return Text("#${M[index]!.id}",
+            style: const TextStyle(
+                fontSize: 14,
+                fontFamily: "Times new roman",
+                backgroundColor: Colors.green));
+      }
       if (M[index]!.touchCount == 0) {
-        return const Center(
-            child: Icon(
+        return const Icon(
           Icons.question_mark_outlined,
           size: 30,
-        ));
+        );
       } else {
         return Text("#${M[index]!.id}",
-            style:
-                const TextStyle(fontSize: 14, fontFamily: "Times new roman"));
+            style: const TextStyle(
+                fontSize: 14,
+                fontFamily: "Times new roman",
+                backgroundColor: Colors.red));
       }
     } else {
       return const Icon(
@@ -118,9 +128,16 @@ class _ContextualMapState extends State<ContextualMap> {
           centerTitle: true,
           actions: [
             IconButton(
-              onPressed: () =>
-                  Provider.of<ChapterProvider>(context, listen: false)
-                      .cleanProgress(),
+              onPressed: () => confirmDialogWidget(
+                      "Deseas eliminar el progreso actual?", context)
+                  .then(
+                (value) {
+                  if (value) {
+                    Provider.of<ChapterProvider>(context, listen: false)
+                        .cleanProgress();
+                  }
+                },
+              ),
               icon: const Icon(Icons.clear_outlined),
               style: iconButtonStyle(colors),
             )
@@ -173,9 +190,9 @@ class _ContextualMapState extends State<ContextualMap> {
   }
 
   Widget buttonIndex(ChapterModel chapter, colors) {
-    return ElevatedButton(
+    return IconButton(
         onPressed: () => addClickCount(chapter),
         style: iconButtonStyle(colors),
-        child: selectStyle(chapter.chapterID));
+        icon: selectStyle(chapter.chapterID));
   }
 }
