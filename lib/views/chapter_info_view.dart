@@ -36,11 +36,15 @@ class _ChapterInfoState extends State<ChapterInfo> {
   }
 
   void goToChapterInfo(context, int idChapter) async {
-    await Provider.of<ChapterProvider>(context, listen: false)
-        .activateNextChapter(idChapter + 1);
+    if (idChapter == 0 || idChapter == 6) {
+      return;
+    } else {
+      await Provider.of<ChapterProvider>(context, listen: false)
+          .activateNextChapter(idChapter + 1);
 
-    Navigator.pushReplacementNamed(context, '/chapter_info',
-        arguments: await DBService.getChapterByID(idChapter));
+      Navigator.pushReplacementNamed(context, '/chapter_info',
+          arguments: await DBService.getChapterByID(idChapter));
+    }
   }
 
   @override
@@ -78,7 +82,7 @@ class _ChapterInfoState extends State<ChapterInfo> {
       return Column(
         children: [
           widgetCard(context, i, colors),
-          buttonsBar(context, i, colors)
+          buttonsBar(context, chapter.chapterID, colors)
         ],
       );
     } else {

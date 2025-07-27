@@ -15,7 +15,7 @@ class ChapterProvider extends ChangeNotifier {
   }
 
   activateNextChapter(int pos) async {
-    if (pos == chapters.length) {
+    if (pos >= chapters.length) {
       return;
     }
     chapters[pos].activated = true;

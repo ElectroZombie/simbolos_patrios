@@ -54,7 +54,7 @@ class _ContextualMapState extends State<ContextualMap> {
           "Este capítulo no se encuentra disponible todavía. Primero debes completar el tema anterior",
           context);
       return;
-    } else if (M[chapter.chapterID + 1]!.activated) {
+    } else if (chapter.chapterID == 6 || M[chapter.chapterID + 1]!.activated) {
       goToChapterInfo(context, chapter);
       return;
     } else {
@@ -71,7 +71,7 @@ class _ContextualMapState extends State<ContextualMap> {
 
   Widget selectStyle(int index) {
     if (M[index]!.activated) {
-      if (M[index + 1]!.activated) {
+      if (index == 6 || M[index + 1]!.activated) {
         return Text("#${M[index]!.id}",
             style: const TextStyle(
                 fontSize: 14,
