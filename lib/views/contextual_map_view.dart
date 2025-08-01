@@ -69,14 +69,27 @@ class _ContextualMapState extends State<ContextualMap> {
     }
   }
 
+  int isEnabled(int index) {
+    if (M[index]!.activated) {
+      if (index == 6 || M[index + 1]!.activated) {
+        return 0;
+      }
+      if (M[index]!.touchCount == 0) {
+        return 1;
+      } else {
+        return 2;
+      }
+    } else {
+      return 1;
+    }
+  }
+
   Widget selectStyle(int index) {
     if (M[index]!.activated) {
       if (index == 6 || M[index + 1]!.activated) {
         return Text("#${M[index]!.id}",
-            style: const TextStyle(
-                fontSize: 14,
-                fontFamily: "Times new roman",
-                backgroundColor: Colors.green));
+            style:
+                const TextStyle(fontSize: 14, fontFamily: "Times new roman"));
       }
       if (M[index]!.touchCount == 0) {
         return const Icon(
@@ -85,10 +98,8 @@ class _ContextualMapState extends State<ContextualMap> {
         );
       } else {
         return Text("#${M[index]!.id}",
-            style: const TextStyle(
-                fontSize: 14,
-                fontFamily: "Times new roman",
-                backgroundColor: Colors.red));
+            style:
+                const TextStyle(fontSize: 14, fontFamily: "Times new roman"));
       }
     } else {
       return const Icon(
@@ -192,7 +203,7 @@ class _ContextualMapState extends State<ContextualMap> {
   Widget buttonIndex(ChapterModel chapter, colors) {
     return IconButton(
         onPressed: () => addClickCount(chapter),
-        style: iconButtonStyle(colors),
+        style: iconButtonEnabledStyle(colors, isEnabled(chapter.chapterID)),
         icon: selectStyle(chapter.chapterID));
   }
 }
