@@ -103,11 +103,5 @@ class LandingView extends StatelessWidget {
 }
 
 void showSheet(context, colors) {
-  showModalBottomSheet(
-      backgroundColor: colors.surface,
-      isScrollControlled: true,
-      context: context,
-      builder: (BuildContext context) {
-        return infoSheet(context, colors);
-      });
+  infoSheet(context, colors);
 }
