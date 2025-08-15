@@ -36,11 +36,13 @@ class _ChapterInfoState extends State<ChapterInfo> {
   }
 
   void goToChapterInfo(context, int idChapter) async {
-    if (idChapter == 0 || idChapter == 6) {
+    if (idChapter == 0 || idChapter == 7) {
       return;
     } else {
-      await Provider.of<ChapterProvider>(context, listen: false)
-          .activateNextChapter(idChapter + 1);
+      if (idChapter + 1 != 7) {
+        await Provider.of<ChapterProvider>(context, listen: false)
+            .activateNextChapter(idChapter + 1);
+      }
 
       Navigator.pushReplacementNamed(context, '/chapter_info',
           arguments: await DBService.getChapterByID(idChapter));
@@ -59,7 +61,7 @@ class _ChapterInfoState extends State<ChapterInfo> {
       appBar: AppBar(
         backgroundColor: colors.onPrimaryFixedVariant,
         foregroundColor: colors.onPrimary,
-        title: const Text("INFORMACIÓN DE LA CLASE"),
+        title: Text("CLASE #${chapter.chapterID}"),
         leading: const BackButton(),
         centerTitle: true,
       ),
@@ -91,21 +93,23 @@ class _ChapterInfoState extends State<ChapterInfo> {
   }
 
   Widget buttonsBar(context, i, colors) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        IconButton(
-            onPressed: () => goToChapterInfo(context, i - 1),
-            icon: const Icon(Icons.arrow_circle_left_outlined),
-            iconSize: 40,
-            style: iconButtonStyle(colors)),
-        IconButton(
-            onPressed: () => goToChapterInfo(context, i + 1),
-            icon: const Icon(Icons.arrow_circle_right_outlined),
-            iconSize: 40,
-            style: iconButtonStyle(colors))
-      ],
-    );
+    return Padding(
+        padding: const EdgeInsets.only(top: 2.5),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            IconButton(
+                onPressed: () => goToChapterInfo(context, i - 1),
+                icon: const Icon(Icons.arrow_circle_left_outlined),
+                iconSize: 40,
+                style: iconButtonStyle(colors)),
+            IconButton(
+                onPressed: () => goToChapterInfo(context, i + 1),
+                icon: const Icon(Icons.arrow_circle_right_outlined),
+                iconSize: 40,
+                style: iconButtonStyle(colors))
+          ],
+        ));
   }
 
   Widget widgetCard(BuildContext context, int i, colors) {
