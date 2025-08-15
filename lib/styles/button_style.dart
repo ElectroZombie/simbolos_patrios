@@ -18,7 +18,7 @@ buttonStyle(ColorScheme colors) {
 
 iconButtonStyle(ColorScheme colors) {
   return ButtonStyle(
-      fixedSize: const WidgetStatePropertyAll(Size(60, 60)),
+      fixedSize: const WidgetStatePropertyAll(Size(55, 55)),
       backgroundColor: WidgetStatePropertyAll(colors.secondary),
       shadowColor: WidgetStatePropertyAll(colors.tertiary),
       overlayColor: WidgetStatePropertyAll(colors.onPrimaryFixedVariant),
@@ -28,7 +28,7 @@ iconButtonStyle(ColorScheme colors) {
           color: colors.onSecondary,
           fontWeight: FontWeight.bold)),
       shape: WidgetStatePropertyAll(RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30),
+          borderRadius: BorderRadius.circular(28),
           side: BorderSide(color: colors.tertiary, width: 1.75))));
 }
 

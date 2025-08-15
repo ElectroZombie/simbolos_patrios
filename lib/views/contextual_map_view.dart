@@ -51,7 +51,7 @@ class _ContextualMapState extends State<ContextualMap> {
   void addClickCount(ChapterModel chapter) {
     if (!M[chapter.chapterID]!.activated) {
       errorDialogWidget(
-          "Este capítulo no se encuentra disponible todavía. Primero debes completar el tema anterior",
+          "Este capítulo no se encuentra disponible todavía. Primero debes haber completado el tema anterior",
           context);
       return;
     } else if (chapter.chapterID == 6 || M[chapter.chapterID + 1]!.activated) {
@@ -89,7 +89,7 @@ class _ContextualMapState extends State<ContextualMap> {
       if (index == 6 || M[index + 1]!.activated) {
         return Text("#${M[index]!.id}",
             style:
-                const TextStyle(fontSize: 14, fontFamily: "Times new roman"));
+                const TextStyle(fontSize: 15, fontFamily: "Times new roman"));
       }
       if (M[index]!.touchCount == 0) {
         return const Icon(
@@ -99,7 +99,7 @@ class _ContextualMapState extends State<ContextualMap> {
       } else {
         return Text("#${M[index]!.id}",
             style:
-                const TextStyle(fontSize: 14, fontFamily: "Times new roman"));
+                const TextStyle(fontSize: 15, fontFamily: "Times new roman"));
       }
     } else {
       return const Icon(
@@ -140,7 +140,7 @@ class _ContextualMapState extends State<ContextualMap> {
           actions: [
             IconButton(
               onPressed: () => confirmDialogWidget(
-                      "Deseas eliminar el progreso actual?", context)
+                      "¿Deseas eliminar el progreso actual?", context)
                   .then(
                 (value) {
                   if (value) {
@@ -168,16 +168,20 @@ class _ContextualMapState extends State<ContextualMap> {
                           SizedBox(
                             height: (MediaQuery.of(context).size.height * 0.21),
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              buttonIndex(data.getChapter(1), colors),
-                              buttonIndex(data.getChapter(2), colors),
-                              buttonIndex(data.getChapter(3), colors),
-                            ],
-                          ),
+                          Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  buttonIndex(data.getChapter(1), colors),
+                                  buttonIndex(data.getChapter(2), colors),
+                                  buttonIndex(data.getChapter(3), colors),
+                                ],
+                              )),
                           SizedBox(
-                            height: (MediaQuery.of(context).size.height * 0.21),
+                            height: (MediaQuery.of(context).size.height * 0.15),
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -187,7 +191,7 @@ class _ContextualMapState extends State<ContextualMap> {
                             ],
                           ),
                           SizedBox(
-                            height: (MediaQuery.of(context).size.height * 0.21),
+                            height: (MediaQuery.of(context).size.height * 0.15),
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
