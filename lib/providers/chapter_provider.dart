@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:educative_software/models/chapter_model.dart';
-import 'package:educative_software/services/db_service.dart';
+
+import '../models/chapter_model.dart';
+import '../services/db_service.dart';
 
 class ChapterProvider extends ChangeNotifier {
   List<ChapterModel> chapters = [ChapterModel.nullChapter()];

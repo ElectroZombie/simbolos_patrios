@@ -1,7 +1,7 @@
-name: educative_software
-description: "Una aplicación educativa para enseñar sobre los símbolos y atributos nacionales"
+name: simbolos_nacionales_ult
+description: "UNA APLICACIÓN PARA CONOCER Y ESTUDIAR LOS SÍMBOLOS Y ATRIBUTOS PATRIOS"
 publish_to: "none"
-version: 0.2.1
+version: 1.7.7
 
 environment:
   sdk: ">=3.4.0 <4.0.0"

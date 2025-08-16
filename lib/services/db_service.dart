@@ -1,9 +1,9 @@
 import 'dart:io';
-
-import 'package:educative_software/models/chapter_model.dart';
-import 'package:educative_software/services/chapter_service.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'package:path/path.dart';
+
+import '../models/chapter_model.dart';
+import './chapter_service.dart';
 
 class DBService {
   static Future<Database> _openDB() async {

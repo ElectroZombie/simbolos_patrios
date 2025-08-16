@@ -1,9 +1,9 @@
-import 'package:educative_software/providers/chapter_provider.dart';
-import 'package:educative_software/styles/button_style.dart';
-import 'package:educative_software/widgets/gradient.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../providers/chapter_provider.dart';
+import '../styles/button_style.dart';
+import '../widgets/gradient.dart';
 import '../widgets/info_sheet.dart';
 
 class LandingView extends StatelessWidget {

@@ -1,5 +1,6 @@
-import 'package:educative_software/utils/enum_types.dart';
 import 'package:flutter/material.dart';
+
+import '../utils/enum_types.dart';
 
 class LanguageProvider extends ChangeNotifier {
   LanguageEnum language = LanguageEnum.en;

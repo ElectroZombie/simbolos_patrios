@@ -1,13 +1,12 @@
 import 'dart:convert';
-
-import 'package:educative_software/providers/chapter_provider.dart';
-import 'package:educative_software/services/db_service.dart';
-import 'package:educative_software/styles/button_style.dart';
-import 'package:educative_software/widgets/gradient.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
+import '../providers/chapter_provider.dart';
+import '../services/db_service.dart';
+import '../styles/button_style.dart';
+import '../widgets/gradient.dart';
 import '../models/chapter_model.dart';
 
 class ChapterInfo extends StatefulWidget {

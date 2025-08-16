@@ -1,12 +1,12 @@
-import 'package:educative_software/structs/contextual_icon.dart';
-import 'package:educative_software/widgets/confirm_dialog_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:educative_software/models/chapter_model.dart';
-import 'package:educative_software/providers/chapter_provider.dart';
 
-import '../styles/button_style.dart';
+import '../structs/contextual_icon.dart';
+import '../widgets/confirm_dialog_widget.dart';
 import '../widgets/error_dialog_widget.dart';
+import '../models/chapter_model.dart';
+import '../providers/chapter_provider.dart';
+import '../styles/button_style.dart';
 
 class ContextualMap extends StatefulWidget {
   const ContextualMap({super.key});

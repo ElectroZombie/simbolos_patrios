@@ -1,10 +1,11 @@
-import 'package:educative_software/providers/language_provider.dart';
-import 'package:educative_software/utils/enum_types.dart';
-import 'package:educative_software/widgets/gradient.dart';
-import 'package:flutter/material.dart';
-import 'package:educative_software/styles/button_style.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter/material.dart';
+
+import '../providers/language_provider.dart';
+import '../utils/enum_types.dart';
+import '../widgets/gradient.dart';
+import '../styles/button_style.dart';
 
 infoSheet(BuildContext context, ColorScheme colors) {
   showModalBottomSheet(
@@ -189,7 +190,7 @@ Future<void> _launchUrl() async {
 Widget _showText(LanguageEnum language, colors) {
   return language == LanguageEnum.en
       ? Text(
-          "A mobile application to support learning about Cuba's national simbols"
+          "A mobile application to learn about Cuba's national simbols"
           "(v1.7.7)\n"
           "Developer: "
           "Eric Michel Villavicencio Reyes\n"

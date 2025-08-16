@@ -1,5 +1,6 @@
-import 'package:educative_software/styles/button_style.dart';
 import 'package:flutter/material.dart';
+
+import '../styles/button_style.dart';
 
 Future<bool> confirmDialogWidget(String text, BuildContext context) async {
   ColorScheme colors = Theme.of(context).colorScheme;
