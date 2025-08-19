@@ -1,4 +1,5 @@
 import 'package:provider/provider.dart';
+import 'package:simbolos_nacionales_ult/utils/tuple.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
 
@@ -8,6 +9,47 @@ import '../widgets/gradient.dart';
 import '../styles/button_style.dart';
 
 infoSheet(BuildContext context, ColorScheme colors) {
+  List<Tuple<String, String>> optionList = [
+    Tuple(
+        T: "A mobile application to learn about Cuba's national simbols\n"
+            "(v1.7.7)\n"
+            "Developer: "
+            "Eric Michel Villavicencio Reyes\n"
+            "Building Specs:\n"
+            "Java Version: 17.0.15+6\n"
+            "SQLite 3: 3.49.2\n"
+            "Dart SDK: 3.4.0\n\n"
+            "Built on:\n"
+            "Flutter SDK: 3.22.0\n"
+            "Android SDK: 31.0.0\n"
+            "Code-OSS: 1.100.2\n\n"
+            "Developed on:\n"
+            "Linux x64 6.14.6-arch1-1",
+        K: "Una aplicación móvil para apoyar el aprendizaje de los símbolos nacionales de Cuba\n"
+            "(v1.7.7)\n"
+            "Desarrolladore: "
+            "Eric Michel Villavicencio Reyes\n"
+            "Especificaciones:\n"
+            "Java Version: 17.0.15+6\n"
+            "SQLite 3: 3.49.2\n"
+            "Dart SDK: 3.4.0\n\n"
+            "Construido con:\n"
+            "Flutter SDK: 3.22.0\n"
+            "Android SDK: 31.0.0\n"
+            "Code-OSS: 1.100.2\n\n"
+            "Desarrollado en:\n"
+            "Linux x64 6.14.6-arch1-1"),
+    Tuple(T: "EN", K: "ES"),
+    Tuple(
+        T: "The National Symbols application for mobile devices, aimed at enhancing knowledge of national symbols, "
+            "constitutes a useful and effective teaching tool that seeks to develop a mobile application to "
+            "strengthen the essential aspects of national symbols of Cuba",
+        K: "La aplicación Símbolos Nacionales para dispositivos móviles, con el objetivo de favorecer los "
+            "conocimientos de los símbolos nacionales, constituye un medio de enseñanza útil y eficaz que persigue "
+            "como objetivo desarrollar una aplicación móvil para fortalecer los aspectos esenciales sobre los "
+            "símbolos nacionales de Cuba")
+  ];
+
   showModalBottomSheet(
       backgroundColor: colors.surface,
       isScrollControlled: true,
@@ -58,20 +100,10 @@ infoSheet(BuildContext context, ColorScheme colors) {
                                   child: Padding(
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 10),
-                                      child: Text(
-                                          "La aplicación para dispositivos móviles, con el objetivo de favorecer los conocimientos de los símbolos nacionales, "
-                                          "constituye un medio de enseñanza útil y eficaz que persigue como objetivo desarrollar una aplicación móvil "
-                                          "para fortalecer los aspectos esenciales sobre los símbolos nacionales que se establecen en "
-                                          "LA LEY NO 128 LEY DE LOS SÍMBOLOS NACIONALES DE LA REPÚBLICA DE CUBA, publicado en la Gaceta Oficial "
-                                          "el 19 de septiembre de 2019.",
-                                          maxLines: 20,
-                                          softWrap: true,
-                                          textAlign: TextAlign.justify,
-                                          style: TextStyle(
-                                            fontSize: 14,
-                                            color:
-                                                colors.surfaceContainerHighest,
-                                          ))),
+                                      child: Consumer<LanguageProvider>(
+                                          builder: (context, data, child) =>
+                                              _showText(data.language, colors,
+                                                  2, optionList))),
                                 ),
                                 SizedBox(
                                     height: MediaQuery.of(context).size.height /
@@ -104,7 +136,10 @@ infoSheet(BuildContext context, ColorScheme colors) {
                                                       .symmetric(
                                                       horizontal: 10),
                                                   child: _showText(
-                                                      data.language, colors))),
+                                                      data.language,
+                                                      colors,
+                                                      1,
+                                                      optionList))),
                                       const SizedBox(height: 5),
                                       Column(
                                         children: [
@@ -118,14 +153,16 @@ infoSheet(BuildContext context, ColorScheme colors) {
                                           Consumer<LanguageProvider>(
                                               builder: (context, data, child) =>
                                                   OutlinedButton.icon(
-                                                      onPressed: () => Provider
-                                                              .of<LanguageProvider>(
+                                                      onPressed: () =>
+                                                          Provider.of<LanguageProvider>(
                                                                   context,
                                                                   listen: false)
-                                                          .changeLanguage(),
-                                                      label: _showText2(
+                                                              .changeLanguage(),
+                                                      label: _showText(
                                                           data.language,
-                                                          colors),
+                                                          colors,
+                                                          0,
+                                                          optionList),
                                                       icon: const Icon(Icons
                                                           .catching_pokemon_rounded))),
                                         ],
@@ -187,23 +224,10 @@ Future<void> _launchUrl() async {
   }
 }
 
-Widget _showText(LanguageEnum language, colors) {
+Widget _showText(LanguageEnum language, ColorScheme colors, int option,
+    List<Tuple<String, String>> optionList) {
   return language == LanguageEnum.en
-      ? Text(
-          "A mobile application to learn about Cuba's national simbols"
-          "(v1.7.7)\n"
-          "Developer: "
-          "Eric Michel Villavicencio Reyes\n"
-          "Building Specs:\n"
-          "Java Version: 17.0.15+6\n"
-          "SQLite 3: 3.49.2\n"
-          "Dart SDK: 3.4.0\n\n"
-          "Built on:\n"
-          "Flutter SDK: 3.22.0\n"
-          "Android SDK: 31.0.0\n"
-          "Code-OSS: 1.100.2\n\n"
-          "Developed on:\n"
-          "Linux x64 6.14.6-arch1-1",
+      ? Text(optionList[option].T!,
           maxLines: 20,
           softWrap: true,
           textAlign: TextAlign.justify,
@@ -211,21 +235,7 @@ Widget _showText(LanguageEnum language, colors) {
             fontSize: 14,
             color: colors.surfaceContainerHighest,
           ))
-      : Text(
-          "Una aplicación móvil para apoyar el aprendizaje de los símbolos nacionales de Cuba"
-          "(v1.7.7)\n"
-          "Desarrolladore: "
-          "Eric Michel Villavicencio Reyes\n"
-          "Especificaciones:\n"
-          "Java Version: 17.0.15+6\n"
-          "SQLite 3: 3.49.2\n"
-          "Dart SDK: 3.4.0\n\n"
-          "Construido con:\n"
-          "Flutter SDK: 3.22.0\n"
-          "Android SDK: 31.0.0\n"
-          "Code-OSS: 1.100.2\n\n"
-          "Desarrollado en:\n"
-          "Linux x64 6.14.6-arch1-1",
+      : Text(optionList[option].K!,
           maxLines: 20,
           softWrap: true,
           textAlign: TextAlign.justify,
@@ -233,8 +243,4 @@ Widget _showText(LanguageEnum language, colors) {
             fontSize: 14,
             color: colors.surfaceContainerHighest,
           ));
-}
-
-Widget _showText2(LanguageEnum language, colors) {
-  return language == LanguageEnum.en ? const Text("EN") : const Text("ES");
 }
