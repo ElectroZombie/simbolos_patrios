@@ -35,7 +35,7 @@ class LandingView extends StatelessWidget {
           centerTitle: true,
           title: Text(
             "SÍMBOLOS NACIONALES",
-            style: TextStyle(fontSize: 20, color: colors.onSurface),
+            style: TextStyle(fontSize: 18, color: colors.onSurface),
           ),
         ),
         body: Stack(children: [
@@ -122,7 +122,7 @@ void showSheet(context, colors) {
             "Linux x64 6.14.6-arch1-1",
         K: "Una aplicación móvil para apoyar el aprendizaje de los símbolos nacionales de Cuba\n"
             "(v1.7.7)\n"
-            "Desarrolladore: "
+            "Desarrollador: "
             "Eric Michel Villavicencio Reyes\n"
             "Especificaciones:\n"
             "Java Version: 17.0.15+6\n"

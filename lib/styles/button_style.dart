@@ -60,9 +60,7 @@ dialogButtonStyle(ColorScheme colors) {
       overlayColor: WidgetStatePropertyAll(colors.onPrimaryFixedVariant),
       foregroundColor: WidgetStatePropertyAll(colors.onSecondary),
       textStyle: WidgetStatePropertyAll(TextStyle(
-          fontSize: 12,
-          color: colors.onSecondary,
-          fontWeight: FontWeight.bold)),
+          fontSize: 8, color: colors.onSecondary, fontWeight: FontWeight.bold)),
       shape: WidgetStatePropertyAll(RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30),
           side: BorderSide(color: colors.tertiary, width: 1.75))));

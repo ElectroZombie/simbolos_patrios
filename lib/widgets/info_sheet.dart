@@ -102,26 +102,30 @@ infoSheet(
                                                   child: _showText(
                                                       data.language,
                                                       colors,
-                                                      1,
+                                                      0,
                                                       infoSheetData
                                                           .optionList))),
                                       const SizedBox(height: 5),
                                       Column(
                                         children: [
-                                          Row(children: [
-                                            TextButton(
-                                                style: buttonStyle(colors),
-                                                child: const Text("GitHub"),
-                                                onPressed: () => _launchUrl(
-                                                    infoSheetData,
-                                                    LinkTypes.gitHub)),
-                                            TextButton(
-                                                style: buttonStyle(colors),
-                                                child: const Text("Email"),
-                                                onPressed: () => _launchUrl(
-                                                    infoSheetData,
-                                                    LinkTypes.email))
-                                          ]),
+                                          Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                TextButton(
+                                                    style: buttonStyle(colors),
+                                                    child: const Text("GitHub"),
+                                                    onPressed: () => _launchUrl(
+                                                        infoSheetData,
+                                                        LinkTypes.gitHub)),
+                                                const SizedBox(width: 5),
+                                                TextButton(
+                                                    style: buttonStyle(colors),
+                                                    child: const Text("Email"),
+                                                    onPressed: () => _launchUrl(
+                                                        infoSheetData,
+                                                        LinkTypes.email))
+                                              ]),
                                           const SizedBox(
                                             height: 5,
                                           ),
@@ -136,9 +140,11 @@ infoSheet(
                                                       label: _showText(
                                                           data.language,
                                                           colors,
-                                                          0,
+                                                          1,
                                                           infoSheetData
                                                               .optionList),
+                                                      style:
+                                                          buttonStyle(colors),
                                                       icon: const Icon(
                                                           Icons.catching_pokemon_rounded))),
                                         ],

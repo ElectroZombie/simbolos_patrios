@@ -4,15 +4,19 @@ import '../styles/button_style.dart';
 
 Future<bool> confirmDialogWidget(String text, BuildContext context) async {
   ColorScheme colors = Theme.of(context).colorScheme;
-  bool value = true;
+  bool value = false;
   await showDialog(
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: const Text('CONFIRMACION'),
+        title: const Text(
+          'CONFIRMACIÓN',
+          style: TextStyle(fontSize: 20),
+        ),
         backgroundColor: colors.surface,
         content: Text(
           text,
+          textAlign: TextAlign.justify,
           style: const TextStyle(fontSize: 14),
         ),
         actions: [
